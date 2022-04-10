@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend for ecommerce app based on mern stack",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "PORT=5001 DB_URI=mongodb://localhost:27017/Ecommerce node server.js",
+    "dev": "PORT=5001 DB_URI=mongodb://localhost:27017/Ecommerce EMAIL=app.myBlog@gmail.com EMAIL_PASSWORD=@d!+y@12 nodemon server.js"
+  },
+  "author": "aditya singh",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "16.0.0",
+    "express": "4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "6.2.4",
+    "nodemailer": "^6.7.3",
+    "nodemon": "2.0.15"
+  }
+}

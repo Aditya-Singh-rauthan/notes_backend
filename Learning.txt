@@ -1,0 +1,20 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "backend for ecommerce app based on mern stack",
+    "main": "backend/server.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start":"REACT_APP_LOG_ENABLED=true PORT=5001 node server.js",
+***      "dev":"READ THESE IN PROCESS.ENV(PORT=5001) nodemon server.js READ THESE IN PROCESS.ARGV(PORT=5001)"
+    },
+    "author": "aditya singh",
+    "license": "ISC",
+    "dependencies": {
+      "dotenv": "^16.0.0",
+      "express": "^4.17.3",
+      "mongoose": "^6.2.4",
+      "nodemon": "^2.0.15"
+    }
+  }
+  
