@@ -11,6 +11,6 @@ app.get('/',(req,res)=>{
     return res.send('Running!!!')
 })
 
-app.listen(process.env.PORT,()=>{
+app.listen(process.env.PORT || 5001,()=>{
     console.log('Listening on ',process.env.PORT)
 })
