@@ -5,8 +5,8 @@
   "main": "backend/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "PORT=5001 DB_URI=mongodb://localhost:27017/Ecommerce node server.js",
-    "dev": "PORT=5001 DB_URI=mongodb://localhost:27017/Ecommerce EMAIL=app.myBlog@gmail.com EMAIL_PASSWORD=@d!+y@12 nodemon server.js"
+    "start": "PORT=5001 DB_URI=mongodb+srv://aditya12:%40d!+y%4012@cluster0.1zjsj.mongodb.net/notes-safe-online?retryWrites=true&w=majority node server.js",
+    "dev": "PORT=5001 DB_URI=mongodb+srv://aditya12:%40d!+y%4012@cluster0.1zjsj.mongodb.net/notes-safe-online?retryWrites=true&w=majority EMAIL=app.myBlog@gmail.com EMAIL_PASSWORD=@d!+y@12 nodemon server.js"
   },
   "author": "aditya singh",
   "license": "ISC",
