@@ -9,4 +9,5 @@ connectDatabase()
 // console.log(process.argv)
 app.listen(process.env.PORT,()=>{
     console.log('Listening on ',process.env.PORT)
+    return 'Listening'
 })
