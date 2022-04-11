@@ -5,7 +5,12 @@ const { otpGenerator, encryptPassword } = require("../utils/utilities");
 const { jwtToken } = require("../utils/jwtValidation");
 
 const saveOtpInDb = async (params) => {
-  let { res, ...rest } = params || {};
+  let { res,error,data ,...rest } = params || {};
+  // console.log('>>>>data',error,data)
+  if(error){
+    console.log('>>>error',error)
+    return res.status(500).json({message:"Internal Server Error"})
+  }
   try {
     let otpEntry = await Otp.create({ ...rest });
     if (otpEntry) {
@@ -40,7 +45,7 @@ exports.otpSender = async (req, res) => {
       email,
       content: { otp },
       message: "",
-      callback: () => saveOtpInDb({ ...req.body, res, otp }),
+      callback: (error,data) => saveOtpInDb({ ...req.body, res, otp,error,data }),
     });
   } catch (e) {
     return res

@@ -1,6 +1,7 @@
+require('dotenv').config()
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET_KEY = "ECOMMERCE_BACKEND";
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 exports.jwtToken = (req, res) => {
   const payload = {
@@ -15,7 +16,7 @@ exports.jwtValidation = async (req, res) => {
   if (!token) {
     return res.status(401).json({ message: "Token Verification Failed" });
   }
-  jwt.verify(token, "Jwt Secret Key", (err, decoded) => {
+  jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
     if (err) {
       return res.status(401).json({ message: "Invalid Token" });
     }

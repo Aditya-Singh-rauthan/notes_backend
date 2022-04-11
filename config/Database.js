@@ -1,6 +1,6 @@
+require('dotenv').config("/config/.env")
 const mongoose = require('mongoose')
-
-const db_uri = 'mongodb+srv://aditya12:%40d!+y%4012@cluster0.1zjsj.mongodb.net/notes-safe-online?retryWrites=true&w=majority'
+const db_uri = process.env.DB_URI
 const connectDatabase = () =>{
     // console.log(">>>>>>process.env",process.env)
     mongoose.connect(db_uri,{useNewUrlParser:true,useUnifiedTopology:true}).then((data)=>{
