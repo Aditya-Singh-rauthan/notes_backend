@@ -5,11 +5,11 @@ const { otpGenerator, encryptPassword } = require("../utils/utilities");
 const { jwtToken } = require("../utils/jwtValidation");
 
 const saveOtpInDb = async (params) => {
-  let { res,error,data ,...rest } = params || {};
+  let { res, error, data, ...rest } = params || {};
   // console.log('>>>>data',error,data)
-  if(error){
-    console.log('>>>error',error)
-    return res.status(500).json({message:"Internal Server Error"})
+  if (error) {
+    console.log(">>>error", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
   try {
     let otpEntry = await Otp.create({ ...rest });
@@ -45,7 +45,8 @@ exports.otpSender = async (req, res) => {
       email,
       content: { otp },
       message: "",
-      callback: (error,data) => saveOtpInDb({ ...req.body, res, otp,error,data }),
+      callback: (error, data) =>
+        saveOtpInDb({ ...req.body, res, otp, error, data }),
     });
   } catch (e) {
     return res
@@ -58,9 +59,9 @@ exports.register = async (req, res) => {
   const { body: { name, email, password, otp } = {} } = req || {};
   let otpVerified = false;
   try {
-    let userAlreadyExists = await User.findOne({email})
-    if(userAlreadyExists){
-        return res.status(400).json({message:'Email Already in Use'})
+    let userAlreadyExists = await User.findOne({ email });
+    if (userAlreadyExists) {
+      return res.status(400).json({ message: "Email Already in Use" });
     }
     let otpEntry = await Otp.findOne({ email });
     let { otp: otpInDb } = otpEntry || {};
@@ -70,7 +71,7 @@ exports.register = async (req, res) => {
     }
     if (otpVerified) {
       let enc_p = await encryptPassword(password);
-    //   console.log('>>>>enc',enc_p)
+      //   console.log('>>>>enc',enc_p)
       let user = await User.create({ name, email, password, enc_p });
       return res.status(200).json({ msg: "Registered Successfully!", user });
     }
