@@ -1,6 +1,7 @@
 const User = require("../models/UserModel");
 const Otp = require("../models/OtpModel");
 const { mailSender } = require("../utils/mailSender");
+const {mailSender:sendInBlue} = require("../utils/sendinblue")
 const { otpGenerator, encryptPassword } = require("../utils/utilities");
 const { jwtToken } = require("../utils/jwtValidation");
 
@@ -48,7 +49,7 @@ exports.otpSender = async (req, res) => {
     `,
   }
   try {
-    mailSender({
+    sendInBlue({
       email,
       content: { otp },
       message: "",
@@ -97,7 +98,7 @@ exports.login = async (req, res) => {
     return res.status(400).json({ message: "User Does Not Exists" });
   }
   let { password } = userResult || {};
-  if (password !== EnteredPassword) {
+  if (password != EnteredPassword) {
     return res.status(412).json({ message: "Incorrect Password" });
   }
   const token = jwtToken();
