@@ -65,7 +65,7 @@ exports.register = async (req, res) => {
     }
     let otpEntry = await Otp.findOne({ email });
     let { otp: otpInDb } = otpEntry || {};
-    otpVerified = otpInDb === otp;
+    otpVerified = otpInDb == otp;
     if (!otpVerified) {
       return res.status(400).json({ msg: "Incorrect OTP!" });
     }
