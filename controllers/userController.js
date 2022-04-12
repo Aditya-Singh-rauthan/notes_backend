@@ -40,6 +40,13 @@ exports.otpSender = async (req, res) => {
   }
 
   let otp = otpGenerator();
+  const mailBody = {
+    subject: "Authentication Required For myBlog.com",
+    html: `
+    <h4>OTP for verification</h4>
+    <p>${otp}</p>
+    `,
+  }
   try {
     mailSender({
       email,
@@ -47,6 +54,7 @@ exports.otpSender = async (req, res) => {
       message: "",
       callback: (error, data) =>
         saveOtpInDb({ ...req.body, res, otp, error, data }),
+      ...mailBody
     });
   } catch (e) {
     return res

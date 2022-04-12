@@ -10,6 +10,8 @@ const mailSender = async ({
   email: receiverEmail,
   content: { otp },
   callback,
+  subject,
+  html
 }) => {
   otp = "" + otp;
   let transporter = nodemailer.createTransport({
@@ -23,12 +25,9 @@ const mailSender = async ({
   let mailOptions = {
     from: email,
     to: receiverEmail,
-    subject: "Authentication Required For myBlog.com",
+    subject,
     // text:otp,
-    html: `
-    <h4>OTP for verification</h4>
-    <p>${otp}</p>
-    `,
+    html,
   };
 
   return transporter.sendMail(mailOptions, callback);
