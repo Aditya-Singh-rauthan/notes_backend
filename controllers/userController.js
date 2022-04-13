@@ -1,7 +1,7 @@
 const User = require("../models/UserModel");
 const Otp = require("../models/OtpModel");
 const { mailSender } = require("../utils/mailSender");
-const {mailSender:sendInBlue} = require("../utils/sendinblue")
+const { mailSender: sendInBlue } = require("../utils/sendinblue");
 const { otpGenerator, encryptPassword } = require("../utils/utilities");
 const { jwtToken } = require("../utils/jwtValidation");
 
@@ -47,7 +47,7 @@ exports.otpSender = async (req, res) => {
     <h4>OTP for verification</h4>
     <p>${otp}</p>
     `,
-  }
+  };
   try {
     sendInBlue({
       email,
@@ -55,7 +55,7 @@ exports.otpSender = async (req, res) => {
       message: "",
       callback: (error, data) =>
         saveOtpInDb({ ...req.body, res, otp, error, data }),
-      ...mailBody
+      ...mailBody,
     });
   } catch (e) {
     return res
@@ -93,16 +93,23 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   const { body: { email: EnteredEmail, password: EnteredPassword } = {} } =
     req || {};
-  let userResult = await User.findOne({ email: EnteredEmail });
-  if (!userResult) {
-    return res.status(400).json({ message: "User Does Not Exists" });
+  try {
+    let userResult = await User.findOne({ email: EnteredEmail });
+    if (!userResult) {
+      return res.status(400).json({ message: "User Does Not Exists" });
+    }
+    let { password } = userResult || {};
+    if (password != EnteredPassword) {
+      return res.status(412).json({ message: "Incorrect Password" });
+    }
+    const payload = {
+      _id: userResult._id,
+    };
+    const token = jwtToken(payload);
+    return res
+      .status(200)
+      .json({ message: "Registered Successfully!", user: userResult, token });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
   }
-  let { password } = userResult || {};
-  if (password != EnteredPassword) {
-    return res.status(412).json({ message: "Incorrect Password" });
-  }
-  const token = jwtToken();
-  return res
-    .status(200)
-    .json({ message: "Registered Successfully!", user: userResult, token });
 };

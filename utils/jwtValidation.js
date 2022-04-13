@@ -3,15 +3,12 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-exports.jwtToken = (req, res) => {
-  const payload = {
-    _id: userResult._id,
-  };
+exports.jwtToken = (payload) => {
   const token = jwt.sign(payload, JWT_SECRET_KEY);
   return token;
 };
 
-exports.jwtValidation = async (req, res) => {
+exports.jwtValidation = async (req, res,next) => {
   let token = req.headers["access-token"];
   if (!token) {
     return res.status(401).json({ message: "Token Verification Failed" });
