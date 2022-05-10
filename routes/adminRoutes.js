@@ -4,6 +4,7 @@ const { otpSender } = require("../controllers/userController");
 const { jwtValidation } = require("../utils/jwtValidation");
 const router = express.Router();
 
-router.route("/admin/users").post( jwtValidation,getAllUsers);
+router.use(jwtValidation)
+router.route("/admin/users").post(getAllUsers);
 
 module.exports = router;

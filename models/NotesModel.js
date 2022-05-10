@@ -14,7 +14,7 @@ const notesSchema = mongoose.Schema({
         type:String,
         required:[true,'Content is Mandatory']
     },
-    status:{
+    progressStatus:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Status'
     },

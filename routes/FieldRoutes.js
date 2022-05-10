@@ -3,10 +3,11 @@ const { addType, addStatus, getAllTypes, getAllStatuses } = require('../controll
 const { jwtValidation } = require('../utils/jwtValidation')
 const router = express.Router()
 
-router.route('/field/addType').post(jwtValidation,addType)
-router.route('/field/addStatus').post(jwtValidation,addStatus)
-router.route('/field/getallTypes').post(jwtValidation,getAllTypes)
-router.route('/field/getAllStatuses').post(jwtValidation,getAllStatuses)
+router.use(jwtValidation)
+router.route('/field/addType').post(addType)
+router.route('/field/addStatus').post(addStatus)
+router.route('/field/getallTypes').post(getAllTypes)
+router.route('/field/getAllStatuses').post(getAllStatuses)
 
 
 module.exports = router

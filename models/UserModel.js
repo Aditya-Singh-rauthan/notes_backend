@@ -8,11 +8,13 @@ const userSchema = mongoose.Schema({
     },
     email:{
         type:String,
-        required:[true,'Email is Mandatory']
+        required:[true,'Email is Mandatory'],
+        unique:[true,'Email Already Exists']
     },
     mobile:{
         type:String,
-        maxLength:6
+        maxLength:6,
+        unique:[true,'Mobile Number Already Exists']
     },
     password:{
         type:String,
