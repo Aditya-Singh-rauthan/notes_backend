@@ -8,5 +8,4 @@ router.route('/user/login').post(login)
 router.route('/user/user').post(getUser)
 router.route('/user/profile').post(jwtValidation, getProfile)
 
-
 module.exports = router

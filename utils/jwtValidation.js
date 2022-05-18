@@ -15,6 +15,7 @@ exports.jwtValidation = async (req, res,next) => {
   }
   jwt.verify(token, JWT_SECRET_KEY, (err, decoded) => {
     if (err) {
+      // console.log('>>>>>err',err)
       return res.status(401).json({ message: "Invalid Token" });
     }
     req.user = decoded;

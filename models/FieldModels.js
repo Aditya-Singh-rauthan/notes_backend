@@ -4,18 +4,27 @@ const statusSchema = mongoose.Schema({
   name: {
     type: String,
   },
+  value:{
+    type: String,
+  }
 });
 
 const typeSchema = mongoose.Schema({
   name: {
     type: String,
   },
+  value:{
+    type: String,
+  }
 });
 
 const userTypeSchema = mongoose.Schema({
   name: {
     type: String,
   },
+  value:{
+    type: String,
+  }
 });
 
 module.exports = {
