@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
     mobile:{
         type:String,
         maxLength:6,
-        unique:[true,'Mobile Number Already Exists']
+        // unique:[true,'Mobile Number Already Exists']
     },
     password:{
         type:String,
@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
         type:String,
         required:[true,'Password is Mandatory']
     },
+    user_type:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'UserType'
+    }
     // image:[{
     //     public_id:{
     //         type:String,

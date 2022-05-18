@@ -9,7 +9,7 @@ exports.jwtToken = (payload) => {
 };
 
 exports.jwtValidation = async (req, res,next) => {
-  let token = req.headers["access-token"];
+  let token = req.headers["authorization"];
   if (!token) {
     return res.status(401).json({ message: "Token Verification Failed" });
   }

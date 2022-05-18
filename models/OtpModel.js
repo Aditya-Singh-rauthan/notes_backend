@@ -4,6 +4,7 @@ const otpSchema = mongoose.Schema({
     otp:{
         type:String,
         required:[true,'OTP is Mandatory'],
+        unique:[true,'OTP already generated'],
         trim:true
     },
     email:{
