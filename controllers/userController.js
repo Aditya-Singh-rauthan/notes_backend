@@ -144,12 +144,17 @@ exports.getUser = async (req, res) => {
 exports.getProfile = async (req, res) => {
   const { body: { _id } = {} } = req || {};
   try {
-    let profile = await ProfileModel.findOne({ user: { _id } }).populate(
+    let profile = await ProfileModel.findOne({ user: { _id } }).select(
+      "-__v"
+    ).populate(
       "user",
       "name userType email"
     );
     return res.status(200).json({ message: "User Found", profile });
   } catch (error) {
-    return res.status(500).json({ message: "Something Went Wrong!!!" });
+    return res.status(500).json({ message: error.message });
   }
+};
+exports.editProfile = async (req, res) => {
+  console.log(">>req", req);
 };

@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
         type:String,
         maxLength:6,
         // unique:[true,'Mobile Number Already Exists']
+        default:''
     },
     password:{
         type:String,
